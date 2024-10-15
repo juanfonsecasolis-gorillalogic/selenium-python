@@ -17,6 +17,23 @@ which python
 deactivate
 ```
 
+## Setup
+```
+pip install selenium
+pip install pytest
+pip list
+```
+
+## Run
+```
+pytest
+```
+
+## Dev Chrome tools
+```
+$x('//input[@id="username"]')
+```
+
 ## References
 1. PyPA. Install packages in a virtual environment using pip and venv. URL: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/ (last consulted on Oct 15th 2024)
 2. Dmitry Shyshkin. Practice Test Automation. URL: https://www.practicetestautomation.com/practice-test-login (last consulted on Oct 15th 2024)
