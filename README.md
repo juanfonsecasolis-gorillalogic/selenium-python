@@ -26,7 +26,7 @@ pip list
 
 ## Run
 ```
-pytest
+pytest -m <testSuiteMarkName>
 ```
 
 ## Dev Chrome tools
