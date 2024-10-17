@@ -19,14 +19,12 @@ deactivate
 
 ## Setup
 ```
-pip install selenium
-pip install pytest
-pip list
+pip install -r requirements.txt
 ```
 
 ## Run
 ```
-pytest -m <testSuiteMarkName>
+pytest -m <testSuiteMarkName> --html=reports/report.html
 ```
 
 ## Dev Chrome tools
