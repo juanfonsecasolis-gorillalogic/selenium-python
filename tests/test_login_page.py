@@ -4,12 +4,6 @@ import pytest
 
 base_url = 'https://practicetestautomation.com'
 
-@pytest.fixture()
-def driver():
-    my_driver = webdriver.Chrome()
-    yield my_driver
-    my_driver.quit()
-
 class TestPositiveScearios:
 
     @pytest.mark.login

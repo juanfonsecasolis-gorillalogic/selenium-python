@@ -1,18 +1,12 @@
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pytest
 
 base_url = 'https://practicetestautomation.com'
 
-@pytest.fixture()
-def driver():
-    my_driver = webdriver.Chrome()
-    yield my_driver
-    my_driver.quit()
-
 class TestNegativeScenarios:
 
     @pytest.mark.negative
+    @pytest.mark.login
     def test_negative_username(self, driver):
         driver.get(f'{base_url}/practice-test-login')
         driver.find_element(By.ID, 'username').send_keys('student123')
@@ -24,6 +18,7 @@ class TestNegativeScenarios:
         assert driver.current_url == f'{base_url}/practice-test-login/'
 
     @pytest.mark.negative
+    @pytest.mark.login
     def test_negative_password(self, driver):
         driver.get(f'{base_url}/practice-test-login')
         driver.find_element(By.ID, 'username').send_keys('student')
