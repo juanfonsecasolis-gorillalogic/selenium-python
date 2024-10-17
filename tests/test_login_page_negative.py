@@ -4,11 +4,16 @@ import pytest
 
 base_url = 'https://practicetestautomation.com'
 
+@pytest.fixture()
+def driver():
+    my_driver = webdriver.Chrome()
+    yield my_driver
+    my_driver.quit()
+
 class TestNegativeScenarios:
 
     @pytest.mark.negative
-    def test_negative_username(self):
-        driver = webdriver.Chrome()
+    def test_negative_username(self, driver):
         driver.get(f'{base_url}/practice-test-login')
         driver.find_element(By.ID, 'username').send_keys('student123')
         driver.find_element(By.ID, 'password').send_keys('Password123')
@@ -17,11 +22,9 @@ class TestNegativeScenarios:
         assert errorElement.is_displayed, 'System should have displayed an error message.'
         assert errorElement.text=='Your username is invalid!', 'Error message is not expected'
         assert driver.current_url == f'{base_url}/practice-test-login/'
-        driver.close()
 
     @pytest.mark.negative
-    def test_negative_password(self):
-        driver = webdriver.Chrome()
+    def test_negative_password(self, driver):
         driver.get(f'{base_url}/practice-test-login')
         driver.find_element(By.ID, 'username').send_keys('student')
         driver.find_element(By.ID, 'password').send_keys('PasswordABC')
@@ -30,4 +33,3 @@ class TestNegativeScenarios:
         assert errorElement.is_displayed, 'System should have displayed an error message.'
         assert errorElement.text=='Your password is invalid!', 'Error message is not expected'
         assert driver.current_url == f'{base_url}/practice-test-login/'
-        driver.close()
