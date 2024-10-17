@@ -7,24 +7,15 @@ class TestNegativeScenarios:
 
     @pytest.mark.negative
     @pytest.mark.login
-    def test_negative_username(self, driver):
+    @pytest.mark.parametrize('username, password, expected_error_message', 
+                             [('incorrectUser', 'Password123', 'Your username is invalid!'), 
+                              ('student', 'PasswordABC', 'Your password is invalid!')])
+    def test_negative_login(self, driver, username, password, expected_error_message):
         driver.get(f'{base_url}/practice-test-login')
-        driver.find_element(By.ID, 'username').send_keys('student123')
-        driver.find_element(By.ID, 'password').send_keys('Password123')
+        driver.find_element(By.ID, 'username').send_keys(username)
+        driver.find_element(By.ID, 'password').send_keys(password)
         driver.find_element(By.ID, 'submit').click()
         errorElement = driver.find_element(By.ID, "error")
         assert errorElement.is_displayed, 'System should have displayed an error message.'
-        assert errorElement.text=='Your username is invalid!', 'Error message is not expected'
-        assert driver.current_url == f'{base_url}/practice-test-login/'
-
-    @pytest.mark.negative
-    @pytest.mark.login
-    def test_negative_password(self, driver):
-        driver.get(f'{base_url}/practice-test-login')
-        driver.find_element(By.ID, 'username').send_keys('student')
-        driver.find_element(By.ID, 'password').send_keys('PasswordABC')
-        driver.find_element(By.ID, 'submit').click()
-        errorElement = driver.find_element(By.ID, "error")
-        assert errorElement.is_displayed, 'System should have displayed an error message.'
-        assert errorElement.text=='Your password is invalid!', 'Error message is not expected'
+        assert errorElement.text==expected_error_message, 'Error message is not expected'
         assert driver.current_url == f'{base_url}/practice-test-login/'
