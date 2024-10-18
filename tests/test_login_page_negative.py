@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 import pytest
+from selenium.webdriver.support.wait import WebDriverWait
 
 base_url = 'https://practicetestautomation.com'
 
@@ -17,5 +18,7 @@ class TestNegativeScenarios:
         driver.find_element(By.ID, 'submit').click()
         errorElement = driver.find_element(By.ID, "error")
         assert errorElement.is_displayed, 'System should have displayed an error message.'
-        assert errorElement.text==expected_error_message, 'Error message is not expected'
+        wait = WebDriverWait(driver, timeout=2)
+        wait.until(lambda d: errorElement.text==expected_error_message)
+        assert errorElement.text==expected_error_message, 'Error message is expected.'
         assert driver.current_url == f'{base_url}/practice-test-login/'

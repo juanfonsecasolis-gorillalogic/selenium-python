@@ -8,7 +8,7 @@ def getDriver(browser):
     print(f'Creating {browser} driver.')
     if browser=="Chrome":
         options = Options()
-        options.add_argument('--headless')
+        #options.add_argument('--headless')
         options.add_argument('--remote-debugging-pipe')
         return webdriver.Chrome(
             options=options,

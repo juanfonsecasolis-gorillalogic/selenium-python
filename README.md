@@ -23,9 +23,10 @@ pip install -r requirements.txt
 ```
 
 ## Run
-```
-pytest -m <testSuiteMarkName> --browser:Chrome --html=reports/report.html
-```
+`pytest -m <testSuiteMarkName> -n=auto --browser:Chrome --html=reports/report.html` or `pytest -n=auto --html=reports/report.html`, for short.
+
+Where
+* 'n' is the number of threads.
 
 ## Dev Chrome tools
 ```
