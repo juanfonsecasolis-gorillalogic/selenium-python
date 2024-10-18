@@ -16,6 +16,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    container:
+      image: selenium/node-chrome
 
     steps:
     - uses: actions/checkout@v4
