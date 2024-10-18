@@ -24,7 +24,7 @@ pip install -r requirements.txt
 
 ## Run
 ```
-pytest -m <testSuiteMarkName> --html=reports/report.html
+pytest -m <testSuiteMarkName> --browser:Chrome --html=reports/report.html
 ```
 
 ## Dev Chrome tools
