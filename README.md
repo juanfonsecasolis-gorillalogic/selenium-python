@@ -1,4 +1,12 @@
 # selenium-python
+
+[![Python application](https://github.com/juanfonsecasolis-gorillalogic/selenium-python/actions/workflows/python-app.yml/badge.svg)](https://github.com/juanfonsecasolis-gorillalogic/selenium-python/actions/workflows/python-app.yml)
+
+2024 Juan M. Fonseca-Solís
+
+Gorilla Logic, Sabana Business Center 10th Floor, Bv. Ernesto Rohrmoser, San José.
+
+## Description
 Practice for course https://gorillalogic.udemy.com/course/selenium-webdriver-python-course
 
 ## Install Python
@@ -23,12 +31,20 @@ pip install -r requirements.txt
 ```
 
 ## Run
-`pytest -m <testSuiteMarkName> -n=auto --browser:Chrome --html=reports/report.html` or `pytest -n=auto --html=reports/report.html`, for short.
+For short, use:
+```
+pytest -n=auto --html=reports/report.html
+```
 
-Where
-* 'n' is the number of threads.
+All options available:
+```
+pytest -m <testSuiteMarkName> -n=auto --browser:Chrome --html=reports/report.html
+```
 
-## Dev Chrome tools
+Where:
+* n is the number of threads (auto means using all available CPUs).
+
+## Inspect web elements using the Dev Chrome tools
 ```
 $x('//input[@id="username"]')
 ```
