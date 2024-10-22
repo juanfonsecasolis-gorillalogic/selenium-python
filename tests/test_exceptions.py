@@ -68,8 +68,11 @@ class TestException:
         driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="add_btn"]').click()
 
         # Verify instruction text element is no longer displayed
-        #assert not instruction_element.is_displayed(), 'Instructions should be invisible.'
+        # assert not instruction_element.is_displayed(), 'Instructions should be invisible.'
+        
+        # workaround #1
         assert len(driver.find_elements(By.ID, 'instructions'))==0, 'Instructions should be invisible.'
         
+        # workaround #2
         wait = WebDriverWait(driver, timeout=10)
         assert wait.until(ec.invisibility_of_element_located((By.ID, 'instructions')))
