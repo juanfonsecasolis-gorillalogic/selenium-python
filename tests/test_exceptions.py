@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
+import time
 
 base_url = 'https://practicetestautomation.com'
 
@@ -33,3 +34,25 @@ class TestException:
         secondRowElement.find_element(By.ID, 'save_btn').click()
 
         assert driver.find_element(By.ID, 'confirmation').text=='Row 2 was saved'
+
+    @pytest.mark.exception
+    @pytest.mark.invalid_element_state_exception
+    def test_invalid_element_state_exception(self, driver):
+        driver.get(f'{base_url}/practice-test-exceptions')
+        
+        # The input field is disabled. Trying to clear the disabled field will throw InvalidElementStateException
+        #driver.find_element(By.CLASS_NAME, 'input-field').send_keys("")
+
+        newString = 'Hamburger'
+        driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="edit_btn"]').click()
+        row1_input_element = driver.find_element(By.XPATH, '//div[@id="row1"]/input')
+
+        wait = WebDriverWait(driver, timeout=10)
+        secondRowElement = wait.until(ec.element_to_be_clickable(row1_input_element))
+
+        row1_input_element.clear()
+        row1_input_element.send_keys(newString)
+        driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="save_btn"]').click()
+        assert row1_input_element.get_attribute('value')==newString
+        
+
