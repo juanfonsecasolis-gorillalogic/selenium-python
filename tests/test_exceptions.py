@@ -54,5 +54,22 @@ class TestException:
         
         assert driver.find_element(By.ID, 'confirmation').text=='Row 1 was saved'
         assert row1_input_element.get_attribute('value')==newString
-        
 
+    @pytest.mark.exception
+    @pytest.mark.stale_element_reference_exception
+    def test_stale_element_reference_exception(self, driver):
+        # Open page
+        driver.get(f'{base_url}/practice-test-exceptions')
+
+        # Find the instructions text element
+        instruction_element = driver.find_element(By.ID, 'instructions')
+
+        # Push add button
+        driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="add_btn"]').click()
+
+        # Verify instruction text element is no longer displayed
+        #assert not instruction_element.is_displayed(), 'Instructions should be invisible.'
+        assert len(driver.find_elements(By.ID, 'instructions'))==0, 'Instructions should be invisible.'
+        
+        wait = WebDriverWait(driver, timeout=10)
+        assert wait.until(ec.invisibility_of_element_located((By.ID, 'instructions')))
