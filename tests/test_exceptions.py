@@ -46,13 +46,13 @@ class TestException:
         newString = 'Hamburger'
         driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="edit_btn"]').click()
         row1_input_element = driver.find_element(By.XPATH, '//div[@id="row1"]/input')
-
         wait = WebDriverWait(driver, timeout=10)
-        secondRowElement = wait.until(ec.element_to_be_clickable(row1_input_element))
-
+        wait.until(ec.element_to_be_clickable(row1_input_element))
         row1_input_element.clear()
         row1_input_element.send_keys(newString)
         driver.find_element(By.XPATH, '//div[@id="row1"]/button[@id="save_btn"]').click()
+        
+        assert driver.find_element(By.ID, 'confirmation').text=='Row 1 was saved'
         assert row1_input_element.get_attribute('value')==newString
         
 
